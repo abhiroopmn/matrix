@@ -26,7 +26,7 @@ $(".trigger").click(function(){
 
 		<div class="header">
 			<div class="title">
-				<a href="#">Panelo Admin</a>
+				<a href="#">Matrix</a>
 			</div>
 
 			<div class="header_right">
