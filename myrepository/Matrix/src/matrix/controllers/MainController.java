@@ -59,14 +59,24 @@ public class MainController extends HttpServlet {
 			System.out.println("Forwarding to LoginController");
 			requestDispatcher.forward(request, response);
 		}
+		else if(request_URI.contains("Register")) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Registration.jsp");
+			System.out.println("Forwarding to Registration Page");
+			requestDispatcher.forward(request, response);
+		}
+		else if(request_URI.contains("Registration")) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("RegistrationController");
+			System.out.println("Forwarding to Registration Controller");
+			requestDispatcher.forward(request, response);
+		}
 		else if(request_URI.contains("Home")) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.html");
 			System.out.println("Forwarding to index.html");
 			requestDispatcher.forward(request, response);
 		}
 		else if(request_URI.contains("Login")) {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.html");
-			System.out.println("Forwarding to login.html");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.jsp");
+			System.out.println("Forwarding to Login.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		else{

@@ -7,6 +7,8 @@ public class UserTO {
 	private String email;
 	private String accountNo;
 	private String ifsc;
+	private String password;
+	
 	public String getName() {
 		return name;
 	}
@@ -43,4 +45,16 @@ public class UserTO {
 	public void setIfsc(String ifsc) {
 		this.ifsc = ifsc;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String toString(){
+		String userString = "[name:"+name+",dob:"+dob+",mobile:"+mobile+",email:"+email+",accountNo:"+accountNo+",ifsc:"+ifsc+",password:"+password+"]";
+		return userString;
+	}
+	
 }
