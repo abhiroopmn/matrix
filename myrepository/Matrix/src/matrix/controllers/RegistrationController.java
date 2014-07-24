@@ -14,17 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
 import matrix.bo.UserBO;
+import matrix.exceptions.DatabaseException;
+import matrix.exceptions.ParameterValidationException;
 import matrix.models.UserTO;
 
 public class RegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public RegistrationController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	
+	public RegistrationController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Inside doGet method of Registration Controller");
 		Enumeration parameters = request.getParameterNames();
@@ -42,21 +44,21 @@ public class RegistrationController extends HttpServlet {
 		userTO.setPassword(request.getParameter("password"));
 		System.out.println("Parameters set");
 		System.out.println(userTO);
-		if(UserBO.validate(userTO)){
+		try {
+			UserBO.validateAndStore(userTO);
 			System.out.println("Validation Successful. Redirecting to login.");
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.do");
 			request.setAttribute("successMsg", "Registration was successful");
 			requestDispatcher.forward(request, response);
-		}
-		else{
+		} catch(Exception e) {
 			System.out.println("Validation Failed");
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("Login.do");
-			request.setAttribute("errorMsg", "Registration failed. Try Again");
+			request.setAttribute("errorMsg", e.getMessage());
 			requestDispatcher.forward(request, response);
 		}
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Inside doPost method of RegistrationController");
 		doGet(request,response);
